@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>Real-Time App with Django Channels</title>
+    </head>
+    <body>
+    <h1 id="app" class="mt-4 text-center"><i>{{text}}</i></h1>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+        <script>
+            var socket = new WebSocket('ws://localhost:8000/ws/some_url/');
+
+            socket.onmessage = function(event){
+                var data = JSON.parse(event.data);
+                console.log(data);
+                document.querySelector('#app').innerHTML = data.message;
+            }
+        </script>
+    </body>
+</html>
